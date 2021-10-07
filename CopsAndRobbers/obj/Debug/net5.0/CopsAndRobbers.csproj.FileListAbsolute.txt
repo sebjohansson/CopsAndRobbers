@@ -1,0 +1,16 @@
+C:\Users\sebas\source\repos\Newton Distansstudier\Oktober\CopsAndRobbers\CopsAndRobbers\bin\Debug\net5.0\CopsAndRobbers.exe
+C:\Users\sebas\source\repos\Newton Distansstudier\Oktober\CopsAndRobbers\CopsAndRobbers\bin\Debug\net5.0\CopsAndRobbers.deps.json
+C:\Users\sebas\source\repos\Newton Distansstudier\Oktober\CopsAndRobbers\CopsAndRobbers\bin\Debug\net5.0\CopsAndRobbers.runtimeconfig.json
+C:\Users\sebas\source\repos\Newton Distansstudier\Oktober\CopsAndRobbers\CopsAndRobbers\bin\Debug\net5.0\CopsAndRobbers.runtimeconfig.dev.json
+C:\Users\sebas\source\repos\Newton Distansstudier\Oktober\CopsAndRobbers\CopsAndRobbers\bin\Debug\net5.0\CopsAndRobbers.dll
+C:\Users\sebas\source\repos\Newton Distansstudier\Oktober\CopsAndRobbers\CopsAndRobbers\bin\Debug\net5.0\ref\CopsAndRobbers.dll
+C:\Users\sebas\source\repos\Newton Distansstudier\Oktober\CopsAndRobbers\CopsAndRobbers\bin\Debug\net5.0\CopsAndRobbers.pdb
+C:\Users\sebas\source\repos\Newton Distansstudier\Oktober\CopsAndRobbers\CopsAndRobbers\obj\Debug\net5.0\CopsAndRobbers.csproj.AssemblyReference.cache
+C:\Users\sebas\source\repos\Newton Distansstudier\Oktober\CopsAndRobbers\CopsAndRobbers\obj\Debug\net5.0\CopsAndRobbers.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sebas\source\repos\Newton Distansstudier\Oktober\CopsAndRobbers\CopsAndRobbers\obj\Debug\net5.0\CopsAndRobbers.AssemblyInfoInputs.cache
+C:\Users\sebas\source\repos\Newton Distansstudier\Oktober\CopsAndRobbers\CopsAndRobbers\obj\Debug\net5.0\CopsAndRobbers.AssemblyInfo.cs
+C:\Users\sebas\source\repos\Newton Distansstudier\Oktober\CopsAndRobbers\CopsAndRobbers\obj\Debug\net5.0\CopsAndRobbers.csproj.CoreCompileInputs.cache
+C:\Users\sebas\source\repos\Newton Distansstudier\Oktober\CopsAndRobbers\CopsAndRobbers\obj\Debug\net5.0\CopsAndRobbers.dll
+C:\Users\sebas\source\repos\Newton Distansstudier\Oktober\CopsAndRobbers\CopsAndRobbers\obj\Debug\net5.0\ref\CopsAndRobbers.dll
+C:\Users\sebas\source\repos\Newton Distansstudier\Oktober\CopsAndRobbers\CopsAndRobbers\obj\Debug\net5.0\CopsAndRobbers.pdb
+C:\Users\sebas\source\repos\Newton Distansstudier\Oktober\CopsAndRobbers\CopsAndRobbers\obj\Debug\net5.0\CopsAndRobbers.genruntimeconfig.cache
