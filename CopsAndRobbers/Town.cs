@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CopsAndRobbers
@@ -9,122 +10,306 @@ namespace CopsAndRobbers
     class Town
     {
         List<Person> townsimulation = new List<Person>();
-        Random randy = new Random();
+        Random rnd = new Random();
 
-        protected static int townwidth = 100;
-        protected static int townheight = 25;
 
-        private void Generate() //Metod för att generera slumpad info om varje person
+        protected static int townwidth = 101;
+        protected static int townheight = 26;
+
+        private void Declare_Value()
         {
-
             for (int i = 0; i < 100; i++) //Randomizar följande int/floats som appliceras individuellt för varje person, upp till 100
             {
-                int generate_person = randy.Next(0, 3);
-                float generate_movement_x = randy.Next(-2, 2);
-                float generate_movement_y = randy.Next(-2, 2);
-                int generate_startpos_x = randy.Next(0, 100);
-                int generate_startpos_y = randy.Next(0, 25);
+                int generate_person = rnd.Next(0, 3);
+                int generate_startpos_x = rnd.Next(0, 100);
+                int generate_startpos_y = rnd.Next(0, 25);
                 int[] citizen_inventory = { 1, 1, 1, 1 };
                 int[] empty_inventory = { 0, 0, 0, 0 };
 
-                if (generate_person == 0)
+                switch (generate_person) //Ändrade från If{} till switch{case}
                 {
-                    townsimulation.Add(new Citizen(generate_startpos_x, generate_startpos_y, generate_movement_x, generate_movement_y, citizen_inventory));
-                }
-                if (generate_person == 1)
-                {
-                    townsimulation.Add(new Robber(generate_startpos_x, generate_startpos_y, generate_movement_x, generate_movement_y, empty_inventory));
-                }
-                if (generate_person == 2)
-                {
-                    townsimulation.Add(new Police(generate_startpos_x, generate_startpos_y, generate_movement_x, generate_movement_y, empty_inventory));
-                }
+                    case 0:
+                        townsimulation.Add(new Citizen(generate_startpos_x, generate_startpos_y, citizen_inventory));
+                        break;
 
-            }
+                    case 1:
+                        townsimulation.Add(new Robber(generate_startpos_x, generate_startpos_y, empty_inventory));
+                        break;
 
-            int count = 0;
-            foreach (var item in townsimulation) //Skriver ut info om varje person
-            {
-                count++;
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.Write($"[{count}] ");
-                Console.ForegroundColor = ConsoleColor.Gray;
-
-                Console.WriteLine(item);
-                //Console.WriteLine("Starting Position X: " + item.Startpos_X);
-                //Console.WriteLine("Starting Position Y: " + item.Startpos_Y);
-                //Console.WriteLine("Movement X" + item.Xdirection);
-                //Console.WriteLine("Movement Y" + item.Ydirection);
-                if (item.Inventory.ElementAt(0) == 1)
-                {
-                    Console.WriteLine("Keys:  " + item.Inventory.ElementAt(0));
-                    Console.WriteLine("Phone: " + item.Inventory.ElementAt(1));
-                    Console.WriteLine("Cash:  " + item.Inventory.ElementAt(2));
-                    Console.WriteLine("Watch: " + item.Inventory.ElementAt(3));
-                }
-                if (item.Inventory.ElementAt(0) == 0)
-                {
-                    Console.WriteLine("Keys:  " + item.Inventory.ElementAt(0));
-                    Console.WriteLine("Phone: " + item.Inventory.ElementAt(1));
-                    Console.WriteLine("Cash:  " + item.Inventory.ElementAt(2));
-                    Console.WriteLine("Watch: " + item.Inventory.ElementAt(3));
+                    case 2:
+                        townsimulation.Add(new Police(generate_startpos_x, generate_startpos_y, empty_inventory));
+                        break;
                 }
             }
         }
-        private void Movement() //BETA; Testar än så länge en metod som förflyttar via knapptryck; målet är en loop som automatiserar rörelse
+            private void Generate_Townspeople() //WIP; Använder MovementBETA som mall
         {
-            int redo = 0;
-            int x = 20;
-            int y = 20;
-            ConsoleKeyInfo Keyinfo;
-            do
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("MOVEMENT WIP");
+            Console.ForegroundColor = ConsoleColor.Gray;
+            int count = 0;
+
+
+            foreach (var item in townsimulation) //Genererar visuella bokstäver just nu; men saknar rörelse
             {
-                Keyinfo = Console.ReadKey(true);
-                Console.Clear();
 
-                switch (Keyinfo.Key) //Crashar ifall värdet blir -1; då det räknas som utanför consolefönstret
-                {                    //Behöver en bestämd Buffer Size till Consolefönstret för att göra det optimalt (System.ArgumentOutofRangeException)
+                if (item is Police)
+                {
 
-                    case ConsoleKey.RightArrow:
-                        x++;
-                        Console.SetCursorPosition(x, y);
-                        Console.WriteLine("Penislord");
-                        break;
-
-                    case ConsoleKey.LeftArrow:
-                        x--;
-                        if (x < 0)
-                        {
-                            x++;
-                        }
-                        Console.SetCursorPosition(x, y);
-                        Console.WriteLine("Penislord");
-                        break;
-
-                    case ConsoleKey.UpArrow: //Y går i motsatt riktning
-                        y--;
-                        if (y < 0)
-                        {
-                            y++;
-                        }
-                        Console.SetCursorPosition(x, y);
-                        Console.WriteLine("Penislord");
-                        break;
-
-                    case ConsoleKey.DownArrow: //Y går i motsatt riktning
-                        y++;
-                        Console.SetCursorPosition(x, y);
-                        Console.WriteLine("Penislord");
-                        break;
+                    Console.SetCursorPosition(townsimulation[count].XPosition, townsimulation[count].YPosition);
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.WriteLine("P");
+                    Console.ForegroundColor = ConsoleColor.Gray;
                 }
 
+                if (item is Robber)
+                {
+                    Console.SetCursorPosition(townsimulation[count].XPosition, townsimulation[count].YPosition);
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("R");
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                }
 
-            } while (redo == 0);
+                if (item is Citizen)
+                {
+                    Console.SetCursorPosition(townsimulation[count].XPosition, townsimulation[count].YPosition);
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("C");
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                }
+                count++;
+            }
+
+            while (true)
+            {
+                
+                int x = 1;
+                int y = 1;
+                Console.CursorLeft = x;
+                Console.CursorTop = y;
+                foreach (var item in townsimulation)
+                {
+                    Random randMove = new Random();
+                    int random = randMove.Next(0, 4);
+                    if (item is Police)
+                    {
+
+                        //Old Position
+                        Console.ForegroundColor = ConsoleColor.Gray;
+                        Console.SetCursorPosition(townsimulation[count].XPosition, townsimulation[count].YPosition);
+                        Console.WriteLine(" ");
+
+
+                        //New Position
+                        if (random == 0)
+                        {
+                            townsimulation[count].XPosition++;
+                            if (townsimulation[count].XPosition < 0)
+                            {
+                                townsimulation[count].XPosition = 100;
+                            }
+                            if (townsimulation[count].XPosition > 100)
+                            {
+                                townsimulation[count].XPosition = 0;
+                            }
+                        }
+                        else if (random == 1)
+                        {
+                            townsimulation[count].XPosition--;
+                            if (townsimulation[count].XPosition < 0)
+                            {
+                                townsimulation[count].XPosition = 100;
+                            }
+                            if (townsimulation[count].XPosition > 100)
+                            {
+                                townsimulation[count].XPosition = 0;
+                            }
+                        }
+                        else if (random == 2)
+                        {
+                            townsimulation[count].YPosition++;
+                            if (townsimulation[count].XPosition < 0)
+                            {
+                                townsimulation[count].XPosition = 25;
+                            }
+                            if (townsimulation[count].XPosition > 25)
+                            {
+                                townsimulation[count].XPosition = 0;
+                            }
+                        }
+                        if (random == 3)
+                        {
+                            townsimulation[count].YPosition--;
+                            if (townsimulation[count].XPosition < 0)
+                            {
+                                townsimulation[count].XPosition = 25;
+                            }
+                            if (townsimulation[count].XPosition > 25)
+                            {
+                                townsimulation[count].XPosition = 0;
+                            }
+                        }
+
+
+                        Console.SetCursorPosition(townsimulation[count].XPosition, townsimulation[count].YPosition);
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.WriteLine("P");
+                        Console.ForegroundColor = ConsoleColor.Gray;
+
+                        //Collision
+
+
+                    }
+
+                    if (item is Robber)
+                    {
+                        //Old Position
+                        Console.ForegroundColor = ConsoleColor.Gray;
+                        Console.SetCursorPosition(townsimulation[count].XPosition, townsimulation[count].YPosition);
+                        Console.WriteLine(" ");
+
+
+                        //New Position
+                        if (random == 0)
+                        {
+                            townsimulation[count].XPosition++;
+                            if (townsimulation[count].XPosition < 0)
+                            {
+                                townsimulation[count].XPosition = 100;
+                            }
+                            if (townsimulation[count].XPosition > 100)
+                            {
+                                townsimulation[count].XPosition = 0;
+                            }
+                        }
+                        else if (random == 1)
+                        {
+                            townsimulation[count].XPosition--;
+                            if (townsimulation[count].XPosition < 0)
+                            {
+                                townsimulation[count].XPosition = 100;
+                            }
+                            if (townsimulation[count].XPosition > 100)
+                            {
+                                townsimulation[count].XPosition = 0;
+                            }
+                        }
+                        else if (random == 2)
+                        {
+                            townsimulation[count].YPosition++;
+                            if (townsimulation[count].XPosition < 0)
+                            {
+                                townsimulation[count].XPosition = 25;
+                            }
+                            if (townsimulation[count].XPosition > 25)
+                            {
+                                townsimulation[count].XPosition = 0;
+                            }
+                        }
+                        if (random == 3)
+                        {
+                            townsimulation[count].YPosition--;
+                            if (townsimulation[count].XPosition < 0)
+                            {
+                                townsimulation[count].XPosition = 25;
+                            }
+                            if (townsimulation[count].XPosition > 25)
+                            {
+                                townsimulation[count].XPosition = 0;
+                            }
+                        }
+
+
+                        Console.SetCursorPosition(townsimulation[count].XPosition, townsimulation[count].YPosition);
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("R");
+                        Console.ForegroundColor = ConsoleColor.Gray;
+
+                    }
+
+                    if (item is Citizen)
+                    {
+
+                        //Old Position
+                        Console.ForegroundColor = ConsoleColor.Gray;
+                        Console.SetCursorPosition(townsimulation[count].XPosition, townsimulation[count].YPosition);
+                        Console.WriteLine(" ");
+
+
+                        //New Position
+                        if (random == 0)
+                        {
+                            townsimulation[count].XPosition++;
+                            if (townsimulation[count].XPosition < 0)
+                            {
+                                townsimulation[count].XPosition = 100;
+                            }
+                            if (townsimulation[count].XPosition > 100)
+                            {
+                                townsimulation[count].XPosition = 0;
+                            }
+                        }
+                        else if (random == 1)
+                        {
+                            townsimulation[count].XPosition--;
+                            if (townsimulation[count].XPosition < 0)
+                            {
+                                townsimulation[count].XPosition = 100;
+                            }
+                            if (townsimulation[count].XPosition > 100)
+                            {
+                                townsimulation[count].XPosition = 0;
+                            }
+                        }
+                        else if (random == 2)
+                        {
+                            townsimulation[count].YPosition++;
+                            if (townsimulation[count].XPosition < 0)
+                            {
+                                townsimulation[count].XPosition = 25;
+                            }
+                            if (townsimulation[count].XPosition > 25)
+                            {
+                                townsimulation[count].XPosition = 0;
+                            }
+                        }
+                        if (random == 3)
+                        {
+                            townsimulation[count].YPosition--;
+                            if (townsimulation[count].XPosition < 0)
+                            {
+                                townsimulation[count].XPosition = 25;
+                            }
+                            if (townsimulation[count].XPosition > 25)
+                            {
+                                townsimulation[count].XPosition = 0;
+                            }
+                        }
+
+
+                        Console.SetCursorPosition(townsimulation[count].XPosition, townsimulation[count].YPosition);
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("C");
+                        Console.ForegroundColor = ConsoleColor.Gray;
+                    }
+                    count++;
+                }
+            }
         }
         internal void Run() //Huvudmetod; Main hänvisas hit där alla metoder körs.
         {
-            Generate();
-            Movement();
+
+            Declare_Value();
+            //Show_Inventory();
+            Generate_Townspeople();
+
+            while (true)
+            {
+                Console.SetCursorPosition(0, 0);
+                //Movement_Townspeople();
+                Thread.Sleep(64);
+            }
         }
     }
 }

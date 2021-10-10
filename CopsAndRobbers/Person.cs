@@ -6,48 +6,55 @@ using System.Threading.Tasks;
 
 namespace CopsAndRobbers
 {
-    class Person
+    class Person //Superclass
     {
-        internal int Startpos_X { get; set; }
-        internal int Startpos_Y { get; set; }
-
-        internal double Xdirection { get; set; }
-        internal double Ydirection { get; set; }
-
+        internal int XPosition { get; set; }
+        internal int YPosition { get; set; }
         internal int[] Inventory = { 1, 1, 1, 1 };
-
-        internal Person(int startposx, int startposy, float xdirection, float ydirection, int[] inventory)
+        internal Person(int xposition, int yposition, int[] inventory)
         {
-            Startpos_X = startposx;
-            Startpos_Y = startposy;
-            Xdirection = xdirection;
-            Ydirection = ydirection;
+            XPosition = xposition;
+            YPosition = yposition;
             Inventory = inventory;
         }
     }
 
     class Citizen : Person
     {
-        internal Citizen(int startposx, int startposy, float xdirection, float ydirection, int[] inventory)
-            : base(startposx, startposy, xdirection, ydirection, inventory)
+        internal Citizen(int xposition, int yposition, int[] inventory)
+            : base(xposition, yposition, inventory)
         {
+            XPosition = xposition;
+            YPosition = yposition;
+
+            Inventory = inventory;
         }
 
     }
 
     class Robber : Person
     {
-        internal Robber(int startposx, int startposy, float xdirection, float ydirection, int[] inventory)
-    : base(startposx, startposy, xdirection, ydirection, inventory)
+        internal Robber(int xposition, int yposition, int[] inventory)
+            : base(xposition, yposition, inventory)
         {
+            XPosition = xposition;
+            YPosition = yposition;
+
+            Inventory = inventory;
         }
     }
 
     class Police : Person
     {
-        internal Police(int startposx, int startposy, float xdirection, float ydirection, int[] inventory)
-    : base(startposx, startposy, xdirection, ydirection, inventory)
+        internal Police(int xposition, int yposition, int[] inventory)
+            : base(xposition, yposition, inventory)
         {
+            XPosition = xposition;
+            YPosition = yposition;
+
+            Inventory = inventory;
         }
     }
+
+
 }
